@@ -17,7 +17,7 @@ import javax.jms.Destination;
 @PropertySource("classpath:/application.properties")
 public class AppConfig {
 
-    public static final String ADDRESS = "tcp://HOMER:61616";
+    public static final String ADDRESS = "${jms.broker.url}";
 
     @Bean
     ClientApp clientApp() {

@@ -4,9 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,7 +12,6 @@ import java.net.URL;
 
 
 public class ApplicationMain extends Application{
-    public static final String ADDRESS = "${jms.broker.url}";
 
     public static void main(String[] args) {
 
