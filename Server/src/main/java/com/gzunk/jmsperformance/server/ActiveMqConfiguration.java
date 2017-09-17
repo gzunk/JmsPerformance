@@ -20,7 +20,7 @@ import javax.jms.JMSException;
 @PropertySource("classpath:/application.properties")
 public class ActiveMqConfiguration {
 
-    public static final String ADDRESS = "tcp://HOMER:61616";
+    public static final String ADDRESS = "${jms.broker.url}";
 
     private BrokerService broker;
 

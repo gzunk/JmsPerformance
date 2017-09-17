@@ -15,6 +15,7 @@ import java.net.URL;
 
 
 public class ApplicationMain extends Application{
+    public static final String ADDRESS = "${jms.broker.url}";
 
     public static void main(String[] args) {
 
