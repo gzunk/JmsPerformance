@@ -14,12 +14,12 @@ public class ClientApp {
     @Resource
     Destination destination;
 
-    public void postMessages() {
-        System.out.println("Posting Messages");
+    public void postMessages(String message, final int count) {
 
-        for (int i=0; i<100; i++) {
+        for (int i=0; i < count; i++) {
             int finalI = i;
-            jmsOperations.send(destination, session -> session.createTextMessage(String.format("MESSAGE: %d", finalI)));
+            jmsOperations.send(
+                    destination, session -> session.createTextMessage(String.format("%s - %d", message, finalI)));
         }
 
     }

@@ -1,58 +1,41 @@
 package com.gzunk.jmsperformance.client;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.command.ActiveMQQueue;
-import org.springframework.beans.factory.annotation.Value;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.jms.core.JmsOperations;
-import org.springframework.jms.core.JmsTemplate;
 
-import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.Queue;
+import java.net.URL;
 
-@Configuration
-@PropertySource("classpath:/application.properties")
-public class ApplicationMain {
 
-    public static final String ADDRESS = "tcp://HOMER:61616";
+public class ApplicationMain extends Application{
 
     public static void main(String[] args) {
 
         System.out.println("Starting Client");
+        launch(args);
+
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
 
         // Load application context
-        ApplicationContext ac = new AnnotationConfigApplicationContext(ApplicationMain.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        // Invoke application
-        ClientApp clientApp = (ClientApp) ac.getBean("clientApp");
-        clientApp.postMessages();
+        FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("/mainForm.fxml"));
+        loader.setControllerFactory(ac::getBean);
+        Parent root = loader.load();
+
+        stage.setTitle("FXML Welcome");
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
-
-    @Bean
-    ClientApp clientApp() {
-        return new ClientApp();
-    }
-
-    @Bean
-    ConnectionFactory connectionFactory() {
-        return new ActiveMQConnectionFactory(ADDRESS);
-    }
-
-    @Bean
-    Destination destination(@Value("${jms.queue.name}") String jmsQueueName) {
-        return new ActiveMQQueue(jmsQueueName);
-    }
-
-    @Bean
-    JmsOperations operations() {
-        return new JmsTemplate(connectionFactory());
-    }
-
-
 }
