@@ -22,6 +22,7 @@ dependencies {
 
     // ActiveMQ
     compile("org.apache.activemq:activemq-client:5.15.0")
+    compile("org.apache.activemq:activemq-pool:5.15.0")
     compile("org.apache.activemq:activemq-broker:5.15.0")
     compile("org.apache.activemq:activemq-kahadb-store:5.15.0")
 

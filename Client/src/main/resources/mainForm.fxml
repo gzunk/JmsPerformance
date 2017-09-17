@@ -10,6 +10,7 @@
    <children>
       <Button id="aButton" layoutX="389.0" layoutY="22.0" mnemonicParsing="false" onAction="#clickButton" prefHeight="29.0" prefWidth="96.0" text="Button" />
       <TextField id="textField1" fx:id="textField1" layoutX="14.0" layoutY="24.0" prefHeight="25.0" prefWidth="282.0" text="This is a message" />
-      <Slider id="slider1" fx:id="slider1" layoutX="14.0" layoutY="65.0" prefHeight="14.0" prefWidth="282.0" showTickMarks="true" />
+      <Slider id="slider1" fx:id="slider1" layoutX="14.0" layoutY="65.0" max="1000.0" prefHeight="14.0" prefWidth="282.0" showTickMarks="true" />
+      <Label id="sliderVal" fx:id="sliderVal" layoutX="315.0" layoutY="57.0" prefHeight="17.0" prefWidth="74.0" text="Label" />
    </children>
 </AnchorPane>

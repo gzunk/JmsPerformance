@@ -9,8 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jms.connection.CachingConnectionFactory;
 
+import javax.jms.ConnectionFactory;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
 
 
 public class ApplicationMain extends Application{
@@ -24,11 +27,13 @@ public class ApplicationMain extends Application{
 
     }
 
+    ApplicationContext ac;
+
     @Override
     public void start(Stage stage) throws Exception {
 
         // Load application context
-        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
         FXMLLoader loader = new FXMLLoader(ApplicationMain.class.getResource("/mainForm.fxml"));
         loader.setControllerFactory(ac::getBean);
@@ -38,5 +43,18 @@ public class ApplicationMain extends Application{
         stage.setScene(new Scene(root));
         stage.show();
 
+    }
+
+    @Override
+    public void stop() {
+        LOG.info("We really need to close now");
+
+        // Close the Executor Service
+        ExecutorService executorService = (ExecutorService)ac.getBean("executorService");
+        executorService.shutdown();
+
+        // Close the connection
+        CachingConnectionFactory cf = (CachingConnectionFactory)ac.getBean("connectionFactory");
+        cf.destroy();
     }
 }
