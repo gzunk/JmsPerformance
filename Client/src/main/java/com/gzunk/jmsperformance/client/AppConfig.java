@@ -17,7 +17,8 @@ import javax.jms.Destination;
 @PropertySource("classpath:/application.properties")
 public class AppConfig {
 
-    public static final String ADDRESS = "${jms.broker.url}";
+    @Value("${jms.broker.url}")
+    private String address;
 
     @Bean
     ClientApp clientApp() {
@@ -26,7 +27,7 @@ public class AppConfig {
 
     @Bean
     ConnectionFactory connectionFactory() {
-        return new ActiveMQConnectionFactory(ADDRESS);
+        return new ActiveMQConnectionFactory(address);
     }
 
     @Bean

@@ -20,7 +20,8 @@ import javax.jms.JMSException;
 @PropertySource("classpath:/application.properties")
 public class ActiveMqConfiguration {
 
-    public static final String ADDRESS = "${jms.broker.url}";
+    @Value("${jms.broker.url}")
+    private String ADDRESS;
 
     private BrokerService broker;
 
