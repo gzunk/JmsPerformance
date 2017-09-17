@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -13,9 +15,11 @@ import java.net.URL;
 
 public class ApplicationMain extends Application{
 
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationMain.class);
+
     public static void main(String[] args) {
 
-        System.out.println("Starting Client");
+        LOG.info("Starting Client");
         launch(args);
 
     }

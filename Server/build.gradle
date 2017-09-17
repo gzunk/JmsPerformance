@@ -13,6 +13,9 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 jar {
     baseName = 'gzunk-jms-perfserver'
     version =  '0.1.0'
@@ -22,16 +25,31 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
 
+    // Spring
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile 'org.springframework:spring-jms:4.3.11.RELEASE'
+    compile("org.springframework:spring-jms:4.3.11.RELEASE")
+
+    // ActiveMQ
     compile("org.apache.activemq:activemq-spring:5.15.0")
     compile("org.apache.activemq:activemq-kahadb-store:5.15.0")
+
+    // Logging Bridges
+    compile("org.slf4j:jcl-over-slf4j:1.7.25")
+    compile("org.slf4j:log4j-over-slf4j:1.7.25")
+    compile("org.slf4j:jul-to-slf4j:1.7.25")
+
+    // Logging API
+    compile("org.slf4j:slf4j-api:1.7.25")
+
+    // Underlying Logger
+    compile("ch.qos.logback:logback-classic:1.1.11")
+    compile("ch.qos.logback:logback-core:1.1.11")
+
+    // Testing
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit:4.12")
 
 }
